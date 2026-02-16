@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->integer('price');
-            $table->text('description')->nullable();
+            $table->string('payment_status');
             $table->timestamps();
         });
     }
