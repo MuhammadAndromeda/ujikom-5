@@ -1,24 +1,30 @@
 <?php
 
-namespace App\Filament\Resources\Products\Schemas;
+namespace App\Filament\Resources\Sales\Schemas;
 
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Schema;
 
-class ProductForm
+class SalesForm
 {
     public static function configure(Schema $schema): Schema
     {
         return $schema
             ->components([
-                Select::make('name')->options([
+                TextInput::make('customer')->label("Customer Name"),
+
+                Select::make('material')->options([
                     'pasir_halus' => 'Pasir Halus',
                     'sirtu' => 'Sirtu',
                     'kerikil_kotor' => 'Kerikil Kotor',
                     'kerikil_bersih' => 'Kerikil Bersih',
                     'pasir_sungai' => 'Pasir Sungai',
                 ])->label('Material Name')->required(),
+
+                TextInput::make('quantity')->label("Sales Quantity (QTY/M3)")->numeric()->prefix('M3')->required(),
+
+                TextInput::make('rit')->label("Travel Itinerary (Rit)")->numeric()->required(),
 
                 TextInput::make('price')->label('Material Price')->numeric()->prefix('Rp')->required(),
 

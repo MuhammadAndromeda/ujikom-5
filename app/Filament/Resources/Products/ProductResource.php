@@ -20,15 +20,15 @@ class ProductResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
 
-    public static function form(Schema $schema): Schema
-    {
-        return ProductForm::configure($schema);
-    }
+    // public static function form(Schema $schema): Schema
+    // {
+    //     return ProductForm::configure($schema);
+    // }
 
-    public static function table(Table $table): Table
-    {
-        return ProductsTable::configure($table);
-    }
+    // public static function table(Table $table): Table
+    // {
+    //     return ProductsTable::configure($table);
+    // }
 
     public static function getRelations(): array
     {
@@ -41,8 +41,6 @@ class ProductResource extends Resource
     {
         return [
             'index' => ListProducts::route('/'),
-            'create' => CreateProduct::route('/create'),
-            'edit' => EditProduct::route('/{record}/edit'),
         ];
     }
 }
