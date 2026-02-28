@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Sales\Schemas;
 
+use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Schema;
@@ -13,6 +14,8 @@ class SalesForm
         return $schema
             ->components([
                 TextInput::make('customer')->label("Customer Name"),
+                
+                DatePicker::make('sales_date')->label('Sales Date'),
 
                 Select::make('material')->options([
                     'pasir_halus' => 'Pasir Halus',

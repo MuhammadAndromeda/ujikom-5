@@ -19,6 +19,7 @@ return new class extends Migration
             $table->integer('rit');
             $table->integer('price');
             $table->string('payment_status');
+            $table->date('sales_date');
             $table->timestamps();
         });
     }

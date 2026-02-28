@@ -9,6 +9,8 @@ use Filament\Tables\Columns\SelectColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
+use function Illuminate\Support\days;
+
 class SalesTable
 {
     public static function configure(Table $table): Table
@@ -32,6 +34,7 @@ class SalesTable
                     'transfer' => 'Transfer',
                     'debt' => 'Debt',
                 ]),
+                TextColumn::make('sales_date')->label('Sales Date')->date(),
             ])
             ->filters([
                 //
