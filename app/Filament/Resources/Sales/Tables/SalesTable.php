@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Sales\Tables;
 
+use Dom\Text;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
@@ -17,24 +18,38 @@ class SalesTable
     {
         return $table
             ->columns([
-                TextColumn::make('customer')->label("Customer Name"),
-                SelectColumn::make('material')->options([
-                    'pasir_halus' => 'Pasir Halus',
-                    'sirtu' => 'Sirtu',
-                    'kerikil_kotor' => 'Kerikil Kotor',
-                    'kerikil_bersih' => 'Kerikil Bersih',
-                    'pasir_sungai' => 'Pasir Sungai',
-                ])->label('Material Name'),
-                TextColumn::make('quantity')->label("(QTY/M3)")->suffix(' M3')->alignCenter(),
-                TextColumn::make('rit')->label("(Rit)")->alignCenter(),
-                TextColumn::make('price')->label('Price')->money('idr', true),
-                SelectColumn::make('payment_status')->options([
-                    'unpaid' => 'Unpaid',
-                    'cash' => 'Cash',
-                    'transfer' => 'Transfer',
-                    'debt' => 'Debt',
-                ]),
-                TextColumn::make('sales_date')->label('Sales Date')->date(),
+                TextColumn::make('customer')
+                    ->label("Customer Name"),
+                TextColumn::make('material')->badge()
+                    ->color(fn (string $state): string => match($state) {
+                        'pasir_halus'    => 'gray',
+                        'sirtu'          => 'gray',
+                        'kerikil_kotor'  => 'gray',
+                        'kerikil_bersih' => 'gray',
+                        'pasir_sungai'   => 'gray',
+                    })->label('Material Name'),
+                TextColumn::make('quantity')
+                    ->label("(QTY/M3)")
+                    ->suffix(' M3')
+                    ->alignCenter(),
+                TextColumn::make('rit')
+                    ->label("(Rit)")
+                    ->alignCenter(),
+                TextColumn::make('price')
+                    ->label('Price')
+                    ->money('idr', true),
+                TextColumn::make('payment_status')
+                    ->badge()
+                    ->color(fn (string $state): string => match($state) {
+                        'cash'     => 'success',
+                        'transfer' => 'info',
+                        'unpaid'   => 'warning',
+                        'debt'     => 'danger',
+                        default    => 'gray',
+                    })->label('Payment Status'),
+                TextColumn::make('sales_date')
+                    ->label('Sales Date')
+                    ->date(),
             ])
             ->filters([
                 //

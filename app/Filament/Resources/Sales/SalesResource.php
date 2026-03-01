@@ -18,7 +18,7 @@ class SalesResource extends Resource
 {
     protected static ?string $model = Sales::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::CurrencyDollar;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedClipboardDocumentList;
 
     public static function form(Schema $schema): Schema
     {
