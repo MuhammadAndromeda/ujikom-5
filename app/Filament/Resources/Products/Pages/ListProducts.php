@@ -4,7 +4,7 @@ namespace App\Filament\Resources\Products\Pages;
 
 use App\Filament\Resources\Products\ProductResource;
 use App\Filament\Resources\Products\Widgets\SalesSummaryWidget;
-use Filament\Actions\CreateAction;
+// use Filament\Actions\CreateAction;
 use Filament\Resources\Pages\ListRecords;
 use Illuminate\Contracts\View\View;
 

@@ -6,10 +6,12 @@ use Carbon\Carbon;
 // use Filament\Actions\BulkActionGroup;
 // use Filament\Actions\DeleteBulkAction;
 use Filament\Forms\Components\DatePicker;
+use Filament\Tables\Columns\Summarizers\Sum;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Filament\Tables\Filters\Filter;
+// use Filament\Tables\Filters\Indicator;
 
 class SalesReportsTable
 {
@@ -43,7 +45,10 @@ class SalesReportsTable
 
                 TextColumn::make('price')
                     ->label('Harga')
-                    ->money('idr', true),
+                    ->money('idr', true)
+                    ->summarize(
+                        Sum::make('summary')->label('Sales Total')->money('idr', true)
+                    ),
 
                 TextColumn::make('payment_status')
                     ->label('Status Pembayaran')
@@ -65,20 +70,32 @@ class SalesReportsTable
             ->filters([
                 Filter::make('sales_date')
                     ->form([
-                        DatePicker::make('search_date')
-                            ->label('Search by Date'),
+                        DatePicker::make('from')
+                            ->label('Dari Tanggal'),
+
+                        DatePicker::make('until')
+                            ->label('Sampai Tanggal'),
                     ])
                     ->query(function (Builder $query, array $data): Builder {
-                        return $query->when(
-                            $data['search_date'],
-                            fn (Builder $query, $date): Builder => $query->whereDate('sales_date', '>=', $date),
-                        );
+                        return $query
+                            ->when(
+                                $data['from'],
+                                fn (Builder $query, $date): Builder => $query->whereDate('sales_date', '>=', $date),
+                            )
+                            ->when(
+                                $data['until'],
+                                fn (Builder $query, $date): Builder => $query->whereDate('sales_date', '<=', $date),
+                            );
                     })
                     ->indicateUsing(function (array $data): array {
-                        if ($data['search_date'] ?? null) {
-                            return ['search_date' => 'Tanggal:' . Carbon::parse($data['search_date'])->format('d M Y')];
+                        $indicators = [];
+                        if ($data['from'] ?? null) {
+                            $indicators['from'] = 'Dari: ' . Carbon::parse($data['from'])->format('d M Y');
                         }
-                        return [];
+                        if ($data['until'] ?? null) {
+                            $indicators['until'] = 'Sampai: ' . Carbon::parse($data['until'])->format('d M Y');
+                        }
+                        return $indicators;
                     }),
             ])
             ->recordActions([

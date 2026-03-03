@@ -8,6 +8,8 @@ use Filament\Widgets\TableWidget as BaseWidget;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Sales;
+use Filament\Tables\Columns\Summarizers\Sum;
+use Filament\Tables\Columns\TextColumn;
 
 class SalesSummaryWidget extends BaseWidget
 {
@@ -32,7 +34,7 @@ class SalesSummaryWidget extends BaseWidget
                 ->groupBy('material')
             )
             ->columns([
-                Tables\Columns\TextColumn::make('material')
+                TextColumn::make('material')
                     ->label('Nama Produk')
                     ->formatStateUsing(fn (string $state): string => match($state) {
                         'pasir_halus'    => 'Pasir Halus',
@@ -43,12 +45,12 @@ class SalesSummaryWidget extends BaseWidget
                         default          => $state,
                     }),
 
-                Tables\Columns\TextColumn::make('total_quantity')
+                TextColumn::make('total_quantity')
                     ->label('Total Terjual (M3)')
                     ->suffix(' M3')
                     ->alignCenter(),
 
-                Tables\Columns\TextColumn::make('total_revenue')
+                TextColumn::make('total_revenue')
                     ->label('Total Pendapatan')
                     ->money('idr', true)
                     ->alignCenter(),
