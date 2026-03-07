@@ -15,31 +15,35 @@
                     <th class="w-max py-3 px-4 h-auto border-2 border-gray-800 bg-blue-600 capitalize tracking-wide text-center text-base text-white font-bold">Nama Customer</th>
                     <th class="w-max py-3 px-4 h-auto border-2 border-gray-800 bg-blue-600 capitalize tracking-wide text-center text-base text-white font-bold">Nama Material</th>
                     <th class="w-max py-3 px-4 h-auto border-2 border-gray-800 bg-blue-600 capitalize tracking-wide text-center text-base text-white font-bold">Tanggal</th>
-                    <th class="w-max py-3 px-4 h-auto border-2 border-gray-800 bg-blue-600 capitalize tracking-wide text-center text-base text-white font-bold">Quantity (M3)</th>
+                    <th class="w-max py-3 px-4 h-auto border-2 border-gray-800 bg-blue-600 capitalize tracking-wide text-center text-base text-white font-bold">Quantity (M<sup>3</sup>)</th>
                     <th class="w-max py-3 px-4 h-auto border-2 border-gray-800 bg-blue-600 capitalize tracking-wide text-center text-base text-white font-bold">Pendapatan</th>
                     <th class="w-max py-3 px-4 h-auto border-2 border-gray-800 bg-blue-600 capitalize tracking-wide text-center text-base text-white font-bold">Payment Status</th>
                     <th class="w-max py-3 px-4 h-auto border-2 border-gray-800 bg-blue-600 capitalize tracking-wide text-center text-base text-white font-bold">Payment Receipt</th>
                 </tr>
             </thead>
             <tbody class="w-full h-auto border-2 border-gray-800">
-                @foreach($sales as $i => $baris)
-                <tr class="w-full h-auto border-2 border-gray-800">
-                    <td class="w-max py-3 px-4 h-auto border-2 border-gray-800 capitalize text-center text-sm text-gray-800 font-bold">{{ $i + 1 }}</td>
-                    <td class="w-max py-3 px-4 h-auto border-2 border-gray-800 capitalize text-center text-sm text-gray-800 font-medium">{{ $baris->customer }}</td>
-                    <td class="w-max py-3 px-4 h-auto border-2 border-gray-800 capitalize text-center text-sm text-gray-800 font-medium">{{ $baris->material }}</td>
-                    <td class="w-max py-3 px-4 h-auto border-2 border-gray-800 capitalize text-center text-sm text-gray-800 font-medium">{{ $baris->sales_date }}</td>
-                    <td class="w-max py-3 px-4 h-auto border-2 border-gray-800 capitalize text-center text-sm text-gray-800 font-medium">{{ $baris->quantity }} M<sup>3</sup></td>
-                    <td class="w-max py-3 px-4 h-auto border-2 border-gray-800 capitalize text-center text-sm text-gray-800 font-medium">IDR {{ number_format($baris->price, 0, ',', '.') }}</td>
-                    <td class="w-max py-3 px-4 h-auto border-2 border-gray-800 capitalize text-center text-sm text-gray-800 font-medium">{{ $baris->payment_status }}</td>
-                    <td class="w-max py-3 px-4 h-auto border-2 border-gray-800 capitalize text-center text-sm text-gray-800 font-medium">
-                        <form action="" method="get">
-                            <a href="/receipt?id={{ $baris->id }}">
-                                <button type="button" class="py-2 px-5 rounded-lg bg-blue-600 hover:bg-blue-700 focus:bg-blue-700 text-sm text-white font-medium capitalize tracking-wide cursor-pointer transition-all">Receipt</button>
-                            </a>
-                        </form>
-                    </td>
-                </tr>
-                @endforeach
+                @if ($sales->isEmpty())
+                    <tr class="w-full h-auto border-2 border-gray-800">
+                        <td colspan="8" class="w-max py-3 px-4 h-auto border-2 border-gray-800 capitalize text-center text-xl text-gray-800 font-bold">No Sales Data</td>
+                    </tr>
+                @else
+                    @foreach($sales as $i => $baris)
+                        <tr class="w-full h-auto border-2 border-gray-800">
+                            <td class="w-max py-3 px-4 h-auto border-2 border-gray-800 capitalize text-center text-sm text-gray-800 font-bold">{{ $i + 1 }}</td>
+                            <td class="w-max py-3 px-4 h-auto border-2 border-gray-800 capitalize text-center text-sm text-gray-800 font-medium">{{ $baris->customer }}</td>
+                            <td class="w-max py-3 px-4 h-auto border-2 border-gray-800 capitalize text-center text-sm text-gray-800 font-medium">{{ $baris->material }}</td>
+                            <td class="w-max py-3 px-4 h-auto border-2 border-gray-800 capitalize text-center text-sm text-gray-800 font-medium">{{ $baris->sales_date }}</td>
+                            <td class="w-max py-3 px-4 h-auto border-2 border-gray-800 capitalize text-center text-sm text-gray-800 font-medium">{{ $baris->quantity }} M<sup>3</sup></td>
+                            <td class="w-max py-3 px-4 h-auto border-2 border-gray-800 capitalize text-center text-sm text-gray-800 font-medium">IDR {{ number_format($baris->price, 0, ',', '.') }}</td>
+                            <td class="w-max py-3 px-4 h-auto border-2 border-gray-800 capitalize text-center text-sm text-gray-800 font-medium">{{ $baris->payment_status }}</td>
+                            <td class="w-max py-3 px-4 h-auto border-2 border-gray-800 capitalize text-center text-sm text-gray-800 font-medium">
+                                <a href="/receipt?id={{ $baris->id }}">
+                                    <button type="button" class="py-2 px-5 rounded-lg bg-blue-600 hover:bg-blue-700 focus:bg-blue-700 text-sm text-white font-medium capitalize tracking-wide cursor-pointer transition-all">Receipt</button>
+                                </a>
+                            </td>
+                        </tr>
+                    @endforeach
+                @endif
             </tbody>
         </table>
     </section>

@@ -28,6 +28,7 @@ class AdminPanelProvider extends PanelProvider
             ->id('admin')
             ->path('dashboard')
             ->brandName('CV. Sumber Pasir Jaya')
+            ->homeUrl('/')
             ->login()
             ->registration()
             ->passwordReset()
@@ -36,7 +37,7 @@ class AdminPanelProvider extends PanelProvider
             ->profile()
             ->sidebarCollapsibleOnDesktop()
             ->colors([
-                'primary' => Color::Green,
+                'primary' => Color::Blue,
             ])
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\Filament\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\Filament\Pages')
