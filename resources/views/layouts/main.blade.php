@@ -16,7 +16,7 @@
 <body>
     @include('partials.navbar')
 
-    <main class="w-full">
+    <main class="w-full bg-no-repeat bg-cover bg-center" style="background-image: url({{ asset('images/background.jpg') }})">
         @yield('content')
     </main>
 </body>
