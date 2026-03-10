@@ -1,13 +1,11 @@
 @extends('layouts.main')
 @section('content')
-    <section class="w-full px-15 h-screen bg-gray-100 gap-6 flex flex-col justify-center items-center">
-        <header>
-            <form action="/report" method="get" class="w-full gap-8 flex justify-start items-center">
-                <input type="text" value="{{ request('search') }}" name="search" id="search" class="w-120 py-2 px-3 bg-white border-2 border-gray-600/60 focus:border-blue-400 rounded-sm text-gray-800 text-base text-left font-medium tracking-wide focus:ring-0 focus:outline-0 focus:shadow-md focus:shadow-blue-400 transition-all duration-300" placeholder="Search by Name">
+    <section class="w-full px-15 pt-30 h-screen bg-gray-100 gap-6 flex flex-col justify-start items-center">
+        <form action="/report" method="get" class="w-full gap-8 flex justify-center items-center">
+            <input type="text" value="{{ request('search') }}" name="search" id="search" class="w-120 py-2 px-3 bg-white border-2 border-gray-600/60 focus:border-blue-400 rounded-sm text-gray-800 text-base text-left font-medium tracking-wide focus:ring-0 focus:outline-0 focus:shadow-md focus:shadow-blue-400 transition-all duration-300" placeholder="Search by Name">
 
-                <button type="submit" class="py-2 px-6 rounded-lg bg-blue-600 hover:bg-blue-700 focus:bg-blue-700 text-base text-white font-medium capitalize tracking-wide cursor-pointer transition-all">Search</button>
-            </form>
-        </header>
+            <button type="submit" class="py-2 px-6 rounded-lg bg-blue-600 hover:bg-blue-700 focus:bg-blue-700 text-base text-white font-medium capitalize tracking-wide cursor-pointer transition-all">Search</button>
+        </form>
         <table class="w-full h-auto border-2 border-gray-800 shadow-lg shadow-black/60">
             <thead class="w-full h-auto border-2 border-gray-800">
                 <tr class="w-full h-auto border-2 border-gray-800">
@@ -46,5 +44,8 @@
                 @endif
             </tbody>
         </table>
+        <footer class="w-full flex justify-center items-center absolute bottom-20">
+            {{ $sales->appends(['search' => request('search')])->links() }}
+        </footer>
     </section>
 @endsection

@@ -12,7 +12,7 @@ Route::get('/report', function () {
     
     $sales = Sales::when($search, function ($query, $search) {
         return $query->where('customer', 'like', '%' . $search . '%');
-    })->get();
+    })->paginate(5);
 
     return view('report', [
         'title' => 'Sales Report',
