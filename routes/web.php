@@ -1,8 +1,10 @@
 <?php
 
+use App\Exports\SalesExport;
 use App\Models\Sales;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\Route;
+use Maatwebsite\Excel\Facades\Excel;
 
 Route::get('/', function () {
     return view('home', ['title' => 'Home']);
@@ -33,4 +35,14 @@ Route::get('/receipt/download', function () {
     $pdf = Pdf::loadView('receipt-pdf', ['sale' => $sale]);
     
     return $pdf->download('receipt-' . $sale->customer . '.pdf');
+});
+
+Route::get('/export-excel', function () {
+    $startDate = request('start_date');
+    $endDate = request('end_date');
+    
+    return Excel::download(
+        new SalesExport($startDate, $endDate), 
+        'laporan-penjualan-' . now()->format('d-m-Y') . '.xlsx'
+    );
 });

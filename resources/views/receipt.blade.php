@@ -88,7 +88,7 @@
     
         <section class="w-full pb-4 flex justify-center items-center">
             <a href="/receipt/download?id={{ request('id') }}">
-                <button type="button" class="py-3 px-12 rounded-lg bg-green-600 hover:bg-green-700 text-2xl text-white font-medium capitalize tracking-wide cursor-pointer transition-all">
+                <button type="button" class="py-3 px-13 rounded-lg bg-blue-600 hover:bg-blue-700 focus:bg-blue-700 text-xl text-white font-medium capitalize tracking-wide cursor-pointer transition-all">
                     Download PDF
                 </button>
             </a>

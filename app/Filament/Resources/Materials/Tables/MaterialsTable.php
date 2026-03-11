@@ -20,6 +20,10 @@ class MaterialsTable
                 TextColumn::make('unit')
                     ->label('Satuan')
                     ->searchable(),
+                TextColumn::make('stock')
+                    ->label('Stock (M³)')
+                    ->suffix(' M³')
+                    ->sortable(),
                 TextColumn::make('created_at')
                     ->label('Dibuat')
                     ->dateTime('d M Y')
