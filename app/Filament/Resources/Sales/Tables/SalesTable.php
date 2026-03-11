@@ -2,11 +2,13 @@
 
 namespace App\Filament\Resources\Sales\Tables;
 
-use Dom\Text;
+// use Dom\Text;
+
+use App\Models\Material;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
-use Filament\Tables\Columns\SelectColumn;
+// use Filament\Tables\Columns\SelectColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
@@ -19,24 +21,23 @@ class SalesTable
         return $table
             ->columns([
                 TextColumn::make('customer')
-                    ->label("Customer Name"),
-                TextColumn::make('material')->badge()
-                    ->color(fn (string $state): string => match($state) {
-                        'pasir_halus'    => 'gray',
-                        'sirtu'          => 'gray',
-                        'kerikil_kotor'  => 'gray',
-                        'kerikil_bersih' => 'gray',
-                        'pasir_sungai'   => 'gray',
-                    })->label('Material Name'),
+                    ->label("Nama Customer"),
+                TextColumn::make('material')
+                    ->badge()
+                    ->color('gray')
+                    ->label('Nama Material'),
                 TextColumn::make('quantity')
-                    ->label("(QTY/M3)")
-                    ->suffix(' M3')
+                    ->label("(QTY/M³)")
+                    ->suffix(' M³')
                     ->alignCenter(),
                 TextColumn::make('rit')
                     ->label("(Rit)")
                     ->alignCenter(),
                 TextColumn::make('price')
-                    ->label('Price')
+                    ->label('Harga')
+                    ->money('idr', true),
+                TextColumn::make('paid')
+                    ->label('Dibayar')
                     ->money('idr', true),
                 TextColumn::make('payment_status')
                     ->badge()
@@ -47,8 +48,9 @@ class SalesTable
                         'debt'     => 'danger',
                         default    => 'gray',
                     })->label('Payment Status'),
-                TextColumn::make('sales_date')
-                    ->label('Sales Date')
+                TextColumn::make('created_at')
+                    ->label('Tanggal Penjualan')
+                    ->date('d M Y')
                     ->date(),
             ])
             ->filters([

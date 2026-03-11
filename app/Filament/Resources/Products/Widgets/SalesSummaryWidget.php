@@ -35,15 +35,9 @@ class SalesSummaryWidget extends BaseWidget
             )
             ->columns([
                 TextColumn::make('material')
-                    ->label('Nama Produk')
-                    ->formatStateUsing(fn (string $state): string => match($state) {
-                        'pasir_halus'    => 'Pasir Halus',
-                        'sirtu'          => 'Sirtu',
-                        'kerikil_kotor'  => 'Kerikil Kotor',
-                        'kerikil_bersih' => 'Kerikil Bersih',
-                        'pasir_sungai'   => 'Pasir Sungai',
-                        default          => $state,
-                    }),
+                    ->badge()
+                    ->color('gray')
+                    ->label('Nama Material'),
 
                 TextColumn::make('total_quantity')
                     ->label('Total Terjual (M3)')

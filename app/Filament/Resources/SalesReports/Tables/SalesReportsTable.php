@@ -24,15 +24,9 @@ class SalesReportsTable
                     ->searchable(),
                 
                 TextColumn::make('material')
-                    ->label('Jenis Material')
-                    ->formatStateUsing(fn (string $state): string => match($state) {
-                        'pasir_halus'    => 'Pasir Halus',
-                        'sirtu'          => 'Sirtu',
-                        'kerikil_kotor'  => 'Kerikil Kotor',
-                        'kerikil_bersih' => 'Kerikil Bersih',
-                        'pasir_sungai'   => 'Pasir Sungai',
-                        default          => $state,
-                    }),
+                    ->badge()
+                    ->color('gray')
+                    ->label('Nama Material'),
                  
                 TextColumn::make('quantity')
                     ->label('Quantity (M3)')
@@ -61,14 +55,14 @@ class SalesReportsTable
                         default    => 'gray',
                     }),
 
-                TextColumn::make('sales_date')
+                TextColumn::make('created_at')
                     ->label('Tanggal')
                     ->date('d M Y')
                     ->searchable()
                     ->sortable(),
             ])
             ->filters([
-                Filter::make('sales_date')
+                Filter::make('created_at')
                     ->form([
                         DatePicker::make('from')
                             ->label('Dari Tanggal'),
@@ -80,11 +74,11 @@ class SalesReportsTable
                         return $query
                             ->when(
                                 $data['from'],
-                                fn (Builder $query, $date): Builder => $query->whereDate('sales_date', '>=', $date),
+                                fn (Builder $query, $date): Builder => $query->whereDate('created_at', '>=', $date),
                             )
                             ->when(
                                 $data['until'],
-                                fn (Builder $query, $date): Builder => $query->whereDate('sales_date', '<=', $date),
+                                fn (Builder $query, $date): Builder => $query->whereDate('created_at', '<=', $date),
                             );
                     })
                     ->indicateUsing(function (array $data): array {
