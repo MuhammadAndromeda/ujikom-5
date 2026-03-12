@@ -29,8 +29,6 @@ class CustomerResource extends Resource
         return 'Data Master';
     }
 
-    protected static bool $shouldRegisterNavigation = false;
-
     protected static ?string $recordTitleAttribute = 'name';
 
     public static function form(Schema $schema): Schema
@@ -57,5 +55,16 @@ class CustomerResource extends Resource
             'create' => CreateCustomer::route('/create'),
             'edit' => EditCustomer::route('/{record}/edit'),
         ];
+    }
+
+    public static function canAccess(): bool
+    {
+        $user = auth()->user();
+
+        if ($user->is_admin == 1 || $user->email === 'admin@admin.com') {
+            return true;
+        }
+        
+        return $user->can('view customers');
     }
 }

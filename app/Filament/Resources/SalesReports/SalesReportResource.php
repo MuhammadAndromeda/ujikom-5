@@ -51,4 +51,15 @@ class SalesReportResource extends Resource
             'index' => ListSalesReports::route('/'),
         ];
     }
+
+    public static function canAccess(): bool
+    {
+        $user = auth()->user();
+
+        if ($user->is_admin == 1 || $user->email === 'admin@admin.com') {
+            return true;
+        }
+        
+        return $user->can('view sales report');
+    }
 }

@@ -24,6 +24,9 @@ class UsersTable
                 IconColumn::make('is_admin')
                     ->label('Admin')
                     ->boolean(),
+                IconColumn::make('can_access')
+                    ->label('Akses Dashboard')
+                    ->boolean(),
                 TextColumn::make('created_at')
                     ->label('Dibuat')
                     ->dateTime('d M Y')
