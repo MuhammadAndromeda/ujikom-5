@@ -44,7 +44,7 @@ class ProductResource extends Resource
     {
         $user = auth()->user();
 
-        if ($user->is_admin == 1 || $user->email === 'admin@admin.com') {
+        if ($user->is_admin == 1 || $user->email === config('master.email')) {
             return true;
         }
         
