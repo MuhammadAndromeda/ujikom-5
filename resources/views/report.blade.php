@@ -56,11 +56,17 @@
                             <td class="w-max py-3 px-4 h-auto border-2 border-gray-800 capitalize text-center text-sm text-gray-800 font-medium">IDR {{ number_format($baris->price, 0, ',', '.') }}</td>
                             <td class="w-max py-3 px-4 h-auto border-2 border-gray-800 capitalize text-center text-sm text-gray-800 font-medium">IDR {{ number_format($baris->paid, 0, ',', '.') }}</td>
                             <td class="w-max py-3 px-4 h-auto border-2 border-gray-800 capitalize text-center text-sm text-gray-800 font-medium">{{ $baris->payment_status }}</td>
-                            <td class="w-max py-3 px-4 h-auto border-2 border-gray-800 capitalize text-center text-sm text-gray-800 font-medium">
-                                <a href="/receipt?id={{ $baris->id }}">
-                                    <button type="button" class="py-2 px-5 rounded-lg bg-blue-600 hover:bg-blue-700 focus:bg-blue-700 text-sm text-white font-medium capitalize tracking-wide cursor-pointer transition-all">Receipt</button>
-                                </a>
-                            </td>
+                            @if ($baris->payment_status == 'unpaid' || $baris->payment_status == 'debt')
+                                <td class="w-max py-3 px-4 h-auto border-2 border-gray-800 capitalize text-center text-sm text-gray-500 font-medium">
+                                    {{ $baris->payment_status }}
+                                </td>
+                            @else
+                                <td class="w-max py-3 px-4 h-auto border-2 border-gray-800 capitalize text-center text-sm text-gray-800 font-medium">
+                                    <a href="/receipt?id={{ $baris->id }}">
+                                        <button type="button" class="py-2 px-5 rounded-lg bg-blue-600 hover:bg-blue-700 focus:bg-blue-700 text-sm text-white font-medium capitalize tracking-wide cursor-pointer transition-all">Receipt</button>
+                                    </a>
+                                </td>
+                            @endif
                         </tr>
                     @endforeach
                 @endif
