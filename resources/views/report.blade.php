@@ -14,7 +14,7 @@
                     <input type="date" name="end_date" value="{{ request('end_date') }}" class="lg:w-auto w-full py-2 px-3 bg-white border-2 border-gray-600/60 rounded-sm text-gray-800 text-base font-medium focus:ring-0 focus:outline-0 transition-all">
                     <button type="submit" class="lg:w-auto w-full py-2 px-4 rounded-lg bg-blue-600 hover:bg-blue-700 text-base text-white font-medium capitalize cursor-pointer transition-all">Apply Filter</button>
                     @if(request('start_date') || request('end_date'))
-                        <a href="/report" class="lg:w-auto w-full py-2 px-4 rounded-lg bg-gray-400 hover:bg-gray-500 text-base text-white font-medium capitalize cursor-pointer transition-all">Reset</a>
+                        <a href="/report" class="lg:w-auto w-full py-2 px-4 rounded-lg bg-gray-400 hover:bg-gray-500 text-base text-white text-center font-medium capitalize cursor-pointer transition-all">Reset</a>
                     @endif
                 </form>
             </div>
