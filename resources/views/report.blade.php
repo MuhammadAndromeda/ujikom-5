@@ -35,7 +35,7 @@
                         <th class="w-max py-3 px-4 h-auto border-2 border-gray-800 bg-blue-600 capitalize tracking-wide text-center text-base text-white font-bold">Nama Material</th>
                         <th class="w-max py-3 px-4 h-auto border-2 border-gray-800 bg-blue-600 capitalize tracking-wide text-center text-base text-white font-bold">Tanggal</th>
                         <th class="w-max py-3 px-4 h-auto border-2 border-gray-800 bg-blue-600 capitalize tracking-wide text-center text-base text-white font-bold">Quantity (M<sup>3</sup>)</th>
-                        <th class="w-max py-3 px-4 h-auto border-2 border-gray-800 bg-blue-600 capitalize tracking-wide text-center text-base text-white font-bold">Pendapatan</th>
+                        <th class="w-max py-3 px-4 h-auto border-2 border-gray-800 bg-blue-600 capitalize tracking-wide text-center text-base text-white font-bold">Harga</th>
                         <th class="w-max py-3 px-4 h-auto border-2 border-gray-800 bg-blue-600 capitalize tracking-wide text-center text-base text-white font-bold">Dibayar</th>
                         <th class="w-max py-3 px-4 h-auto border-2 border-gray-800 bg-blue-600 capitalize tracking-wide text-center text-base text-white font-bold">Status Pembayaran</th>
                         <th class="w-max py-3 px-4 h-auto border-2 border-gray-800 bg-blue-600 capitalize tracking-wide text-center text-base text-white font-bold">Nota</th>
@@ -59,7 +59,7 @@
                                 <td class="w-max py-3 px-4 h-auto border-2 border-gray-800 capitalize text-center text-sm text-gray-800 font-medium">{{ $baris->payment_status }}</td>
                                 @if ($baris->payment_status == 'unpaid' || $baris->payment_status == 'debt')
                                     <td class="w-max py-3 px-4 h-auto border-2 border-gray-800 capitalize text-center text-sm text-gray-500 font-medium">
-                                        {{ $baris->payment_status }}
+                                        belum dapat nota
                                     </td>
                                 @else
                                     <td class="w-max py-3 px-4 h-auto border-2 border-gray-800 capitalize text-center text-sm text-gray-800 font-medium">

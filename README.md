@@ -1,59 +1,311 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# CV. Sumber Pasir Jaya — Sales Admin Dashboard
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Sistem manajemen penjualan berbasis web untuk CV. Sumber Pasir Jaya, dibangun menggunakan Laravel 12 + Filament v3.
 
-## About Laravel
+---
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## 📋 Daftar Isi
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+- [Fitur](#fitur)
+- [Tech Stack](#tech-stack)
+- [Persyaratan Sistem](#persyaratan-sistem)
+- [Instalasi](#instalasi)
+- [Konfigurasi](#konfigurasi)
+- [Struktur Proyek](#struktur-proyek)
+- [Panduan Penggunaan](#panduan-penggunaan)
+- [Panduan Developer](#panduan-developer)
+- [Akun Default](#akun-default)
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+---
 
-## Learning Laravel
+## ✨ Fitur
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+### Dashboard
+- Stats card (total penjualan hari ini, total transaksi, produk terlaris)
+- Grafik penjualan 7 hari terakhir
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### Data Master
+- **Kategori** — Kelola kategori material
+- **Material** — Kelola data material beserta stok
+- **Customer** — Kelola data pelanggan
+- **User & Kasir** — Kelola akun pengguna beserta hak akses
 
-## Laravel Sponsors
+### Transaksi Sales
+- CRUD transaksi penjualan
+- Auto-generate nomor invoice (format: INV-YYYYMMDD-XXX)
+- Dropdown material dinamis dari database
+- Auto-kurang stok material setiap transaksi
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+### Laporan
+- **Sales Data** — Summary total terjual & pendapatan per produk
+- **Sales Report** — Read-only list transaksi + filter tanggal
+- **Report Page** — Search, filter tanggal, export Excel, pagination
 
-### Premium Partners
+### Struk/Receipt
+- Detail transaksi lengkap (invoice, customer, material, total, kembalian)
+- Download PDF
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+---
 
-## Contributing
+## 🛠 Tech Stack
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+| Layer | Teknologi |
+|-------|-----------|
+| Backend | Laravel 12 |
+| Admin Panel | Filament v3 |
+| Database | MySQL |
+| Frontend | Blade + Tailwind CSS |
+| PDF Export | barryvdh/laravel-dompdf |
+| Excel Export | maatwebsite/excel |
+| Permission | spatie/laravel-permission |
 
-## Code of Conduct
+---
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+## ⚙️ Persyaratan Sistem
 
-## Security Vulnerabilities
+- PHP >= 8.2
+- Composer
+- MySQL >= 5.7
+- Node.js >= 18 (untuk asset compilation)
+- SSH Access (untuk deployment)
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+---
 
-## License
+## 🚀 Instalasi
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+### 1. Clone repository
+
+```bash
+git clone https://github.com/MuhammadAndromeda/ujikom-5.git
+cd ujikom-5
+```
+
+### 2. Install dependencies
+
+```bash
+composer install
+npm install
+```
+
+### 3. Copy file environment
+
+```bash
+cp .env.example .env
+php artisan key:generate
+```
+
+### 4. Konfigurasi database
+
+Edit file `.env`:
+
+```env
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=ujikom-5
+DB_USERNAME=root
+DB_PASSWORD=
+```
+
+### 5. Jalankan migration & seeder
+
+```bash
+php artisan migrate
+php artisan db:seed --class=PermissionSeeder
+```
+
+### 6. Buat akun admin pertama
+
+```bash
+php artisan make:filament-user
+```
+
+> **Penting:** Gunakan email `sumberpasirjaya09@gmail.com` untuk akun master yang bisa akses semua menu.
+
+### 7. Jalankan server
+
+```bash
+composer run dev
+```
+
+Akses di `http://127.0.0.1:8000`
+
+---
+
+## 🔧 Konfigurasi
+
+### Akun Master
+
+Email akun master dikonfigurasi di `config/master.php`:
+
+```php
+return [
+    'email' => 'sumberpasirjaya09@gmail.com',
+];
+```
+
+Akun dengan email ini akan bypass semua permission check dan bisa akses semua menu.
+
+### Permission
+
+Permission dikelola menggunakan Spatie Laravel Permission. Untuk menambah permission baru:
+
+1. Tambahkan permission di `database/seeders/PermissionSeeder.php`
+2. Jalankan: `php artisan db:seed --class=PermissionSeeder`
+3. Tambahkan `canAccess()` di Resource yang sesuai
+
+---
+
+## 📁 Struktur Proyek
+
+```
+app/
+├── Exports/
+│   └── SalesExport.php              # Export Excel
+├── Filament/
+│   ├── Resources/
+│   │   ├── Categories/              # Resource Kategori
+│   │   ├── Customers/               # Resource Customer
+│   │   ├── Materials/               # Resource Material
+│   │   ├── Products/                # Resource Products (Sales Summary)
+│   │   ├── Sales/                   # Resource Sales (CRUD Transaksi)
+│   │   ├── SalesReports/            # Resource Sales Report (Read-only)
+│   │   └── Users/                   # Resource User & Kasir
+│   └── Widgets/
+│       ├── SalesSummaryWidget.php   # Widget tabel summary produk
+│       ├── SalesChartWidget.php     # Widget grafik penjualan
+│       └── StatsOverviewWidget.php  # Widget stats card dashboard
+├── Models/
+│   ├── Category.php
+│   ├── Customer.php
+│   ├── Material.php
+│   ├── Sales.php                    # Model utama transaksi
+│   └── User.php
+database/
+├── migrations/                      # Semua file migration
+└── seeders/
+    └── PermissionSeeder.php         # Seeder permission Spatie
+resources/
+└── views/
+    ├── layouts/
+    │   └── main.blade.php           # Layout utama halaman publik
+    ├── report.blade.php             # Halaman laporan publik
+    ├── receipt.blade.php            # Halaman struk
+    └── receipt-pdf.blade.php        # Template PDF struk
+routes/
+└── web.php                          # Route publik (report, receipt, export)
+```
+
+---
+
+## 📖 Panduan Penggunaan
+
+### Login
+- Akses dashboard di `/dashboard`
+- Login menggunakan email dan password
+
+### Alur Penggunaan Normal
+
+1. **Setup awal** — Tambah Kategori dan Material terlebih dahulu di menu Data Master
+2. **Tambah Customer** — Daftarkan customer di menu Data Master → Customer
+3. **Input Transaksi** — Masuk ke menu Sales → klik "New Sales" → isi form transaksi
+4. **Cek Struk** — Setelah transaksi, buka `/report` → klik tombol Receipt di row transaksi
+5. **Lihat Laporan** — Buka `/report` untuk filter, search, dan export data penjualan
+
+### Manajemen User
+
+- Hanya akun master (`sumberpasirjaya09@gmail.com`) yang bisa bikin user baru
+- User baru perlu di-toggle `can_access = 1` agar bisa login ke dashboard
+- Centang permission yang sesuai untuk mengatur menu apa yang bisa diakses
+
+---
+
+## 👨‍💻 Panduan Developer
+
+### Menambah Menu/Resource Baru
+
+1. Buat model & migration:
+```bash
+php artisan make:model NamaModel -m
+```
+
+2. Buat Filament Resource:
+```bash
+php artisan make:filament-resource NamaModel
+```
+
+3. Tambahkan navigation group di Resource:
+```php
+public static function getNavigationGroup(): ?string
+{
+    return 'Nama Group';
+}
+```
+
+4. Tambahkan permission baru di `PermissionSeeder.php` dan jalankan seeder
+
+5. Tambahkan `canAccess()` di Resource:
+```php
+public static function canAccess(): bool
+{
+    $user = auth()->user();
+    if ($user->is_admin == 1 || $user->email === config('master.email')) {
+        return true;
+    }
+    return $user->can('view nama-permission');
+}
+```
+
+### Menambah Kolom Baru di Tabel Sales
+
+1. Buat migration:
+```bash
+php artisan make:migration add_kolom_baru_to_sales_table
+```
+
+2. Update `SalesForm.php` untuk form input
+3. Update `SalesTable.php` untuk tampilan tabel
+4. Update `SalesExport.php` jika ingin kolom baru masuk ke export Excel
+5. Update `receipt.blade.php` dan `receipt-pdf.blade.php` jika perlu ditampilkan di struk
+
+### Mengganti Email Akun Master
+
+Edit file `config/master.php`:
+```php
+return [
+    'email' => 'email_baru@domain.com',
+];
+```
+
+Lalu jalankan:
+```bash
+php artisan config:clear
+```
+
+### Menambah Jenis Laporan
+
+Tambahkan route baru di `web.php` dan buat blade file baru di `resources/views/`.
+
+---
+
+## 🔑 Akun Default
+
+| Role | Email | Password | Akses |
+|------|-------|----------|-------|
+| Master Admin | sumberpasirjaya09@gmail.com | *(set saat instalasi)* | Semua menu |
+
+> **Catatan:** Setelah instalasi, segera ganti password akun master dan jangan share kredensial ini ke pihak yang tidak berwenang.
+
+---
+
+## 📞 Kontak
+
+Untuk pertanyaan atau bug report, hubungi developer:
+
+- **Developer:** Andromeda Harahap
+- **Email:** 2009.andromeda@gmail.com
+- **GitHub:** github.com/MuhammadAndromeda
+
+---
+
+*Last updated: Maret 2026*
