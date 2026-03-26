@@ -74,7 +74,7 @@
                 </tbody>
             </table>
         </div>
-        <footer class="w-full flex justify-center items-center absolute bottom-20">
+        <footer class="w-full flex justify-center items-center">
             {{ $sales->appends(['search' => request('search')])->links() }}
         </footer>
     </section>
